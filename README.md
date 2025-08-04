@@ -1,10 +1,27 @@
 
+# 📂 Projects Summary  
+
+## 🚀 AI Trainer - Enhanced Chatbot Capability (Package Loss Case)
+
+**Overview:**  
+- Identified package loss issue due to recipients being unavailable.  
+- Accounted for ~18–20% of chatbot queries (Top 5 operational issue).  
+
+**Solution:**  
+- Added feature: Chatbot provides courier’s phone number during delivery.  
+- Enabled customers to coordinate directly for successful delivery.  
+
+**Impact:**  
+- Package loss queries reduced from ~19% ➜ ~12% within 1 week of launch.  
+
+---
+
 # 📂 Projects  
 
 <details>
-<summary><b>2021 - 2022 | Project: Enhanced Chatbot Capability - Loss Package During Delivery </b></summary>
+<summary><b>2021 - 2022 | AI Trainer: Enhanced Chatbot Capability - Loss Package During Delivery</b></summary>
 
-## 🚀 Project: Enhanced Chatbot Capability
+## 🚀 Enhanced Chatbot Capability - Loss Package During Delivery
 
 ---
 
