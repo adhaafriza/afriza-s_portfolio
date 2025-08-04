@@ -2,9 +2,9 @@
 # 📂 Projects  
 
 <details>
-<summary><b>2021 - 2022 | AI Trainer</b></summary>
+<summary><b>2021 - 2022 | Project: Enhanced Chatbot Capability - Loss Package During Delivery </b></summary>
 
-## 🚀 Project: Enhanced Chatbot Capability - Loss Package During Delivery
+## 🚀 Project: Enhanced Chatbot Capability
 
 ---
 
