@@ -1,4 +1,4 @@
-# 📂 Projects Summary  
+# 📂 Projects List
 
 ---
 
@@ -208,19 +208,34 @@ Customer is given the option to wait until the estimated SLA or cancel the order
 
 ### **📊 Supporting Data**  
 
-**Source Table:** `customer_complaints`  
+**Source Table:** `customer_queries`  
 
 | Column Name              | Data Type |
 |--------------------------|-----------|
-| order_id                 | VARCHAR   |
 | customer_id              | VARCHAR   |
-| complaint_reason         | VARCHAR   |
-| order_status             | VARCHAR   |
-| processing_days          | INT       |
-| is_courier_handover      | CHAR      |
-| is_cancellation_allowed  | CHAR      |
-| csat_score               | INT       |
-| complaint_date           | DATE      |
+| customer_name            | VARCHAR   |
+| customer_phone           | VARCHAR   |
+| customer_address         | VARCHAR   |
+| customer_zip_code        | VARCHAR   |
+| ticket_id                | INT       |
+| contact_reason_level_1   | VARCHAR   |
+| contact_reason_level_2   | VARCHAR   |
+| contact_reason_level_3   | VARCHAR   |
+| ticket_submitted_date    | DATE      |
+| ticket_due_date          | DATE      |
+| is_case_resolved         | CHAR      |
+
+---
+
+### **📝 Sample Data**
+| customer\_id | customer\_name | customer\_phone | customer\_address | customer\_zip\_code | ticket\_id | contact\_reason\_level\_1 | contact\_reason\_level\_2 | contact\_reason\_level\_3                    | ticket\_submitted\_date | ticket\_due\_date | is\_case\_resolved |
+| ------------ | -------------- | --------------- | ----------------- | ------------------- | ---------- | ------------------------- | ------------------------- | -------------------------------------------- | ----------------------- | ----------------- | ------------------ |
+| CUS-010A     | Andi Wijaya    | 081234567801    | Jakarta Selatan   | 12190               | 2001       | Order related             | Over SLA                  | Order processing > 7 days, still in transit  | 2021-05-01              | 2021-05-15        | N                  |
+| CUS-011B     | Siti Rahma     | 081298765802    | Bandung           | 40115               | 2002       | Order related             | Over SLA                  | Package stuck with courier > SLA             | 2021-05-03              | 2021-05-17        | Y                  |
+| CUS-012C     | Budi Santoso   | 081311122803    | Surabaya          | 60234               | 2003       | Order related             | Over SLA                  | Cannot cancel after SLA breach               | 2021-05-04              | 2021-05-18        | Y                  |
+| CUS-013D     | Lina Kartika   | 081344455804    | Medan             | 20151               | 2004       | Order related             | Over SLA                  | Late package, cancellation requested at door | 2021-05-06              | 2021-05-20        | Y                  |
+| CUS-014E     | Agus Pratama   | 081377788805    | Jakarta Barat     | 11460               | 2005       | Order related             | Over SLA                  | Delivery delay, customer refused at doorstep | 2021-05-07              | 2021-05-21        | Y                  |
+
 
 ---
 
@@ -228,10 +243,10 @@ Customer is given the option to wait until the estimated SLA or cancel the order
 ```sql
 SELECT 
     COUNT(*) AS total_complaints,
-    SUM(CASE WHEN LOWER(complaint_reason) LIKE '%over sla%' THEN 1 ELSE 0 END) AS over_sla_complaints,
-    SUM(CASE WHEN LOWER(complaint_reason) LIKE '%over sla%' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS over_sla_percentage
+    SUM(CASE WHEN LOWER(contact_reason_level_2) = 'over sla' THEN 1 ELSE 0 END) AS over_sla_complaints,
+    SUM(CASE WHEN LOWER(contact_reason_level_2) = 'over sla' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS over_sla_percentage
 FROM customer_complaints
-WHERE complaint_date BETWEEN DATE '2021-04-01' AND DATE '2021-04-30';
+WHERE ticket_submitted_date BETWEEN DATE '2021-04-01' AND DATE '2021-04-30';
 ```  
 
 **Result:**  
@@ -246,21 +261,21 @@ WHERE complaint_date BETWEEN DATE '2021-04-01' AND DATE '2021-04-30';
 WITH sla_stats AS (
     SELECT 
         CASE 
-            WHEN complaint_date BETWEEN DATE '2021-04-01' AND DATE '2021-04-30' 
+            WHEN ticket_submitted_date BETWEEN DATE '2021-04-01' AND DATE '2021-04-30' 
                 THEN 'Before Enhancement'
-            WHEN complaint_date BETWEEN DATE '2021-05-01' AND DATE '2021-05-30' 
+            WHEN ticket_submitted_date BETWEEN DATE '2021-05-01' AND DATE '2021-05-30' 
                 THEN 'After Enhancement'
         END AS period,
-        complaint_reason
+        contact_reason_level_2
     FROM customer_complaints
-    WHERE complaint_date BETWEEN DATE '2021-04-01' AND DATE '2021-05-30'
+    WHERE ticket_submitted_date BETWEEN DATE '2021-04-01' AND DATE '2021-05-30'
 )
 
 SELECT 
     period,
     COUNT(*) AS total_complaints,
-    SUM(CASE WHEN LOWER(complaint_reason) LIKE '%over sla%' THEN 1 ELSE 0 END) AS over_sla_complaints,
-    SUM(CASE WHEN LOWER(complaint_reason) LIKE '%over sla%' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS over_sla_percentage
+    SUM(CASE WHEN LOWER(contact_reason_level_2) = 'over sla' THEN 1 ELSE 0 END) AS over_sla_complaints,
+    SUM(CASE WHEN LOWER(contact_reason_level_2) = 'over sla' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS over_sla_percentage
 FROM sla_stats
 GROUP BY period;
 ```  
@@ -280,6 +295,6 @@ Before Enhancement: ██████████░░░░░░░░░ 15
 After Enhancement : ██████░░░░░░░░░░░░░ 8.0%
 ```  
 
-**📈 Summary:** After running the enhancement for 30 days, **Over SLA complaints dropped from ~15% to ~8%** and **CSAT for SLA-related cases improved by +12 points**.
+**📈 Summary:** After running the enhancement for 30 days, **Over SLA complaints dropped from ~15% to ~8%** and **CSAT for SLA-related cases improved by +12 points** (estimated).
 
 </details>  
