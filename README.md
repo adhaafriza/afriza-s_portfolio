@@ -27,7 +27,7 @@
 
 ### **📌 Background**
 A recurring issue of package loss during courier delivery was identified, primarily due to recipients being unavailable to receive their packages.  
-- **Duration:** Several weeks  
+- **Duration:** 2 weeks  
 - **Severity:** Top 5 operational issue  
 - **Impact:** ~18–20% of total chatbot queries  
 
