@@ -51,9 +51,9 @@ A recurring issue of **Over SLA orders** was identified:
 
 **Updated Flow:**  
 
-![Updated Flow](https://github.com/adhaafriza/afriza-s_portfolio/blob/main/Implemented%20new%20SLA%20flow.jpg)
+![Updated Flow](https://github.com/adhaafriza/afriza-s_portfolio/blob/main/Implemented%20new%20SLA.jpg)
 
-Customer is given the option to wait until the estimated SLA or cancel the order.
+Customer is given the option to wait until the estimated SLA or cancel the order and reject the package at doorstep.
 
 ---
 
