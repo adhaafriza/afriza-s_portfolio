@@ -143,7 +143,7 @@ df[['gmv','total_order','total_unit_sold']] = df[['gmv','total_order','total_uni
 print(df.head(10))
 ```
 
-### **📊 Aggregation & Analysis in Python**
+### **📊 Analysis in Python**
 
 Now that the dataset is clean, we can calculate:
 - **Cashback adoption rate**
@@ -240,6 +240,8 @@ SELECT *
 FROM campaign_data
 ORDER BY policy_period, campaign_type, date;
 ```
+
+---
 
 ### **📌 Python Analysis**
 
@@ -414,6 +416,8 @@ CROSS JOIN platform_gmv p;
 **Notes:**
 - The adoption rate won't increased a lot, but the GMV coverage estimated of 20% increase.
 
+---
+
 ### **📌 Python Scenario Simulation**
 
 import pandas as pd
@@ -480,7 +484,7 @@ ORDER BY
     END;
 ```
 
-** Result **
+**Result**
 
 | Period          | Cashback GMV   | Total GMV      | GMV Coverage (%) |
 |-----------------|----------------|----------------|------------------|
@@ -489,7 +493,16 @@ ORDER BY
 | After Trial     | 78,000,000,000 | 130,000,000,000 | 60.0             |
 
 
-** Highlights: **
+**Highlights:**
 - Expected GMV coverage uplift: 20%
 - Actual result of GMV coverage: 65-70%
 - Sustained around 55-60% after the trial
+
+---
+
+## **Final Summary of Initiatives**
+
+| Initiative                     | Expected Result           | Actual Result              | Lesson Learned                  |
+|--------------------------------|--------------------------|----------------------------|----------------------------------|
+| Mandatory Campaign Cashback    | +15–20% coverage spike   | +30–35% spike (temporary) | Campaign boosts are short-term   |
+| Free Trial Cashback (500 Sellers) | +20% coverage increase | +25–30% increase sustained at 55–60% | Targeted trial drives retention |
